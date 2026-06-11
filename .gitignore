@@ -1,0 +1,13 @@
+*.exe
+*.pdf
+*.zip
+*.obj
+*.pdb
+*.ansi.csv
+desktop.ini
+.vscode/
+*gemini*
+fix.c
+fix1.c
+fixed1.c
+search.c
