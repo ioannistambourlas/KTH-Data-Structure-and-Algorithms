@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Futsalaki — demo</title>
+<meta name="description" content="Interactive demo of Futsalaki: find a pickup futsal game in Cyprus, grab a spot and pay in the app.">
+<meta name="theme-color" content="#0f1512">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1512; --bg-2: #161e1a; --bg-3: #1e2823; --line: #2a3530;
+  --text: #eef3ef; --text-2: #a9b5ae; --text-3: #6f7d75;
+  --lime: #c8f25a; --lime-ink: #1b2408; --green: #2f9e61; --warn: #f2b25a; --red: #ef6a5a;
+  --cond: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --body: "Barlow", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { font-family: var(--body); color: var(--text); background: #d9d6cd; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+button, input, select { font: inherit; color: inherit; }
+a { color: inherit; }
+
+/* page around the phone (desktop) */
+.stage { min-height: 100%; display: grid; grid-template-columns: minmax(0, 360px) auto; justify-content: center; align-items: center; gap: 72px; padding: 40px 24px; }
+.aside { color: #2b2a26; font-family: Georgia, serif; }
+.aside a.back { font-family: system-ui, sans-serif; font-size: 14px; color: #555; }
+.aside h1 { font-weight: 400; font-size: 44px; line-height: 1.05; margin: 22px 0 14px; letter-spacing: -.02em; }
+.aside p { font-size: 17px; line-height: 1.55; color: #4d4a43; }
+.aside ul { font-family: system-ui, sans-serif; font-size: 14.5px; color: #4d4a43; padding-left: 18px; line-height: 1.7; }
+.aside small { font-family: system-ui, sans-serif; color: #7a766c; font-size: 13px; display: block; margin-top: 18px; }
+
+.phone { width: 390px; height: 800px; border-radius: 54px; background: #0a0d0b; padding: 12px; box-shadow: 0 40px 80px -30px rgba(0,0,0,.45), inset 0 0 0 2px #2b2f2c; position: relative; }
+.screen { width: 100%; height: 100%; border-radius: 42px; overflow: hidden; background: var(--bg); position: relative; display: flex; flex-direction: column; }
+.notch { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 112px; height: 32px; border-radius: 20px; background: #000; z-index: 50; }
+
+@media (max-width: 860px) {
+  body { background: var(--bg); }
+  .stage { display: block; padding: 0; min-height: 100%; }
+  .aside { display: none; }
+  .phone { width: 100%; height: 100dvh; border-radius: 0; padding: 0; box-shadow: none; }
+  .screen { border-radius: 0; }
+  .notch { display: none; }
+  .mobile-bar { display: flex !important; }
+}
+/* compact embed used as a preview on the portfolio */
+body.embed { background: var(--bg); }
+body.embed .stage { display: block; padding: 0; }
+body.embed .aside, body.embed .notch, body.embed .mobile-bar { display: none !important; }
+body.embed .phone { width: 100%; height: 100vh; padding: 0; border-radius: 0; box-shadow: none; }
+body.embed .screen { border-radius: 0; }
+
+.mobile-bar { display: none; justify-content: space-between; font-size: 12px; padding: 6px 14px; background: #000; color: #bbb; }
+.mobile-bar a { color: #ddd; }
+
+.status { height: 50px; flex: none; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 28px 6px; font-size: 14px; font-weight: 600; }
+.status span:last-child { letter-spacing: 2px; font-size: 11px; }
+@media (max-width: 860px) { .status { display: none; } }
+
+.view { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; position: relative; }
+.view::-webkit-scrollbar { display: none; }
+
+.top { padding: 10px 20px 6px; display: flex; justify-content: space-between; align-items: center; }
+.brand { font-family: var(--cond); font-weight: 700; font-size: 30px; letter-spacing: .01em; text-transform: uppercase; line-height: 1; }
+.brand i { font-style: normal; color: var(--lime); }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--bg-3); display: grid; place-items: center; font-weight: 700; font-size: 13px; color: var(--text-2); border: 1px solid var(--line); }
+
+.hello { padding: 8px 20px 0; color: var(--text-2); font-size: 15px; }
+.hello b { color: var(--text); }
+
+.cities { display: flex; gap: 8px; padding: 14px 20px 4px; overflow-x: auto; scrollbar-width: none; }
+.cities::-webkit-scrollbar { display: none; }
+.pill { flex: none; border: 1px solid var(--line); background: transparent; border-radius: 999px; padding: 7px 14px; font-size: 14px; font-weight: 600; color: var(--text-2); cursor: pointer; }
+.pill[aria-pressed="true"] { background: var(--text); color: var(--bg); border-color: var(--text); }
+
+.day { font-family: var(--cond); text-transform: uppercase; font-size: 15px; letter-spacing: .08em; color: var(--text-3); padding: 20px 20px 8px; }
+
+.game { display: grid; grid-template-columns: 58px 1fr auto; gap: 14px; align-items: center; margin: 0 12px; padding: 14px 8px; border-bottom: 1px solid var(--line); cursor: pointer; border-radius: 14px; transition: background .15s; }
+.game:hover { background: var(--bg-2); }
+.game__time { font-family: var(--cond); font-weight: 700; font-size: 24px; line-height: 1; }
+.game__time small { display: block; font-family: var(--body); font-weight: 500; font-size: 12px; color: var(--text-3); margin-top: 3px; }
+.game__venue { font-weight: 600; font-size: 16px; line-height: 1.25; }
+.game__sub { font-size: 13px; color: var(--text-3); margin-top: 2px; }
+.spots { margin-top: 8px; height: 4px; background: var(--bg-3); border-radius: 4px; overflow: hidden; width: 100%; max-width: 160px; }
+.spots i { display: block; height: 100%; background: var(--lime); border-radius: 4px; }
+.spots.full i { background: var(--text-3); }
+.game__right { text-align: right; }
+.game__price { font-family: var(--cond); font-weight: 700; font-size: 22px; }
+.game__left { font-size: 12px; color: var(--lime); font-weight: 600; white-space: nowrap; }
+.game__left.full { color: var(--text-3); }
+.game__left.mine { color: var(--text); background: var(--green); padding: 1px 7px; border-radius: 6px; }
+
+.empty { padding: 60px 30px; text-align: center; color: var(--text-3); }
+.empty b { display: block; color: var(--text); font-family: var(--cond); font-size: 26px; text-transform: uppercase; margin-bottom: 6px; }
+
+/* tab bar */
+.tabbar { flex: none; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); background: var(--bg); padding: 8px 8px 22px; }
+.tabbar button { background: none; border: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11.5px; font-weight: 600; color: var(--text-3); cursor: pointer; padding: 4px 0; }
+.tabbar button svg { width: 24px; height: 24px; }
+.tabbar button[aria-current="true"] { color: var(--lime); }
+@media (max-width: 860px) { .tabbar { padding-bottom: max(10px, env(safe-area-inset-bottom)); } }
+
+/* detail */
+.hero { position: relative; height: 210px; overflow: hidden; background: #174d33; }
+.hero svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__back { position: absolute; top: 12px; left: 12px; width: 38px; height: 38px; border-radius: 50%; border: 0; background: rgba(0,0,0,.45); color: #fff; display: grid; place-items: center; cursor: pointer; backdrop-filter: blur(6px); }
+.hero__tag { position: absolute; left: 20px; bottom: 16px; font-family: var(--cond); text-transform: uppercase; font-weight: 700; font-size: 13px; letter-spacing: .08em; background: var(--lime); color: var(--lime-ink); padding: 3px 9px; border-radius: 6px; }
+.d-body { padding: 18px 20px 120px; }
+.d-title { font-family: var(--cond); font-weight: 700; text-transform: uppercase; font-size: 34px; line-height: 1; margin: 0 0 6px; }
+.d-sub { color: var(--text-2); font-size: 15px; margin: 0 0 18px; }
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+.facts div { padding: 12px 0; }
+.facts div + div { border-left: 1px solid var(--line); padding-left: 14px; }
+.facts b { display: block; font-family: var(--cond); font-size: 22px; line-height: 1.1; }
+.facts span { font-size: 12px; color: var(--text-3); }
+.h { font-family: var(--cond); text-transform: uppercase; letter-spacing: .08em; font-size: 14px; color: var(--text-3); margin: 0 0 10px; display: flex; justify-content: space-between; }
+.players { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.p { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; background: var(--bg-3); color: var(--text-2); border: 1px solid var(--line); }
+.p.you { background: var(--lime); color: var(--lime-ink); border-color: var(--lime); }
+.p.open { background: transparent; border: 1.5px dashed var(--line); color: var(--text-3); font-weight: 500; }
+.notes { font-size: 15px; color: var(--text-2); line-height: 1.55; margin: 0 0 12px; }
+.org { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 14px; color: var(--text-2); }
+.org b { color: var(--text); display: block; font-size: 15px; }
+
+.cta { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 20px 18px; background: linear-gradient(transparent, var(--bg) 30%); display: flex; gap: 14px; align-items: center; }
+.cta__price { font-family: var(--cond); font-weight: 700; font-size: 30px; line-height: 1; }
+.cta__price small { display: block; font-family: var(--body); font-size: 12px; color: var(--text-3); font-weight: 500; }
+.btn { flex: 1; border: 0; border-radius: 16px; min-height: 54px; font-weight: 700; font-size: 17px; cursor: pointer; transition: transform .1s, opacity .15s; }
+.btn:active { transform: scale(.98); }
+.btn-lime { background: var(--lime); color: var(--lime-ink); }
+.btn-dark { background: var(--bg-3); color: var(--text); border: 1px solid var(--line); }
+.btn[disabled] { opacity: .45; cursor: default; }
+
+/* pay sheet */
+.scrim { position: absolute; inset: 0; background: rgba(0,0,0,.55); opacity: 0; pointer-events: none; transition: opacity .2s; z-index: 30; }
+.scrim.open { opacity: 1; pointer-events: auto; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 31; background: #f6f7f5; color: #16201a; border-radius: 26px 26px 0 0; padding: 12px 20px 26px; transform: translateY(105%); transition: transform .28s cubic-bezier(.2,.8,.2,1); }
+.sheet.open { transform: none; }
+.grab { width: 40px; height: 5px; border-radius: 5px; background: #cfd4d0; margin: 0 auto 16px; }
+.sheet h3 { margin: 0 0 4px; font-size: 20px; }
+.sheet .muted { color: #68736c; font-size: 14px; margin: 0 0 16px; }
+.line { display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid #e3e6e3; font-size: 15px; }
+.line.total { font-weight: 700; font-size: 17px; border-top: 1px solid #16201a; }
+.card-field { margin: 16px 0; border: 1px solid #cfd4d0; border-radius: 12px; padding: 13px 14px; display: flex; gap: 10px; align-items: center; background: #fff; font-size: 15px; color: #3a443e; }
+.card-field span:last-child { margin-left: auto; color: #88928b; font-size: 13px; }
+.paybtn { background: #16201a; color: #fff; width: 100%; }
+.secure { text-align: center; font-size: 12px; color: #88928b; margin-top: 10px; }
+
+.done { position: absolute; inset: 0; z-index: 40; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 30px; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.done.open { opacity: 1; pointer-events: auto; }
+.done .tick { width: 84px; height: 84px; border-radius: 50%; background: var(--lime); color: var(--lime-ink); display: grid; place-items: center; margin-bottom: 22px; }
+.done h2 { font-family: var(--cond); text-transform: uppercase; font-size: 38px; margin: 0 0 8px; line-height: 1; }
+.done p { color: var(--text-2); margin: 0 0 28px; }
+.done .btn { flex: none; width: 100%; max-width: 280px; }
+
+/* create */
+.form { padding: 6px 20px 30px; }
+.form h2 { font-family: var(--cond); text-transform: uppercase; font-size: 34px; margin: 6px 0 4px; }
+.form .lead { color: var(--text-2); font-size: 15px; margin: 0 0 20px; }
+.f { margin-bottom: 14px; }
+.f label { display: block; font-size: 13px; font-weight: 600; color: var(--text-2); margin-bottom: 6px; }
+.in { width: 100%; background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px; outline: 0; color-scheme: dark; }
+.in:focus { border-color: var(--lime); }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.payout { font-size: 13px; color: var(--text-3); margin: 4px 0 18px; line-height: 1.5; }
+.payout b { color: var(--text); }
+
+.toast { position: absolute; left: 50%; top: 60px; transform: translate(-50%, -10px); background: var(--text); color: var(--bg); padding: 9px 16px; border-radius: 999px; font-size: 14px; font-weight: 600; opacity: 0; transition: .2s; z-index: 60; white-space: nowrap; pointer-events: none; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+</style>
+</head>
+<body>
+
+<div class="mobile-bar"><span>Demo &middot; sample data</span><a href="../../#futsalaki">&larr; Ioannis Tambourlas</a></div>
+
+<div class="stage">
+  <aside class="aside">
+    <a class="back" href="../../#futsalaki">&larr; Back to Ioannis Tambourlas</a>
+    <h1>Futsalaki</h1>
+    <p>Pickup futsal in Cyprus, without the WhatsApp group chaos. Find a game, take a spot, pay, show up.</p>
+    <ul>
+      <li>Browse this week&rsquo;s games by city</li>
+      <li>Open a game and join it &mdash; the payment step is simulated</li>
+      <li>Organise your own game from the <b>+</b> tab</li>
+    </ul>
+    <small>Interactive demo with sample games. The real app runs on iOS and Android; payments go through Stripe and organisers are paid out automatically.</small>
+  </aside>
+
+  <div class="phone">
+    <div class="screen" id="screen">
+      <div class="notch"></div>
+      <div class="status"><span id="clock">9:41</span><span>●●● ▲ ▮</span></div>
+      <div class="view" id="view"></div>
+      <nav class="tabbar" id="tabbar">
+        <button data-tab="games" aria-current="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m12 7 4 3-1.5 4.5h-5L8 10z"/><path d="M12 3v4M21 10l-5 0M3 10h5M9.5 14.5 7 19M14.5 14.5 17 19"/></svg>Games</button>
+        <button data-tab="create"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M12 8v8M8 12h8"/></svg>Organise</button>
+        <button data-tab="mine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>My games</button>
+      </nav>
+
+      <div class="scrim" id="scrim"></div>
+      <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+      <div class="done" id="done"></div>
+      <div class="toast" id="toast"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  if (/[?&]embed\b/.test(location.search)) document.body.classList.add("embed");
+
+  var DAY = 86400000;
+  function at(dayOffset, h, m) { var d = new Date(); d.setHours(h, m || 0, 0, 0); return d.getTime() + dayOffset * DAY; }
+
+  var NAMES = ["AK", "MP", "CG", "NK", "SP", "AM", "GL", "PC", "KD", "TH", "EV", "RS", "LA", "DM", "IK", "YP", "ST", "FN"];
+  var games = [
+    { id: "g1", city: "Nicosia", venue: "Strovolos Indoor Arena", area: "Strovolos", t: at(0, 20, 0), dur: 60, size: 10, taken: 8, price: 5, level: "Mixed", org: "Andreas K.", notes: "Indoor court, bibs provided. Please be there 10 minutes early so we start on time." },
+    { id: "g2", city: "Nicosia", venue: "Engomi 5-a-side", area: "Engomi", t: at(0, 21, 30), dur: 60, size: 10, taken: 10, price: 5, level: "Intermediate", org: "Marios P.", notes: "Outdoor turf under lights." },
+    { id: "g3", city: "Limassol", venue: "Germasogeia Futsal Centre", area: "Germasogeia", t: at(1, 19, 0), dur: 90, size: 12, taken: 5, price: 6, level: "Casual", org: "Christos G.", notes: "90 minutes, rotating teams of four. All levels welcome." },
+    { id: "g4", city: "Nicosia", venue: "Lakatamia Sports Hall", area: "Lakatamia", t: at(1, 20, 30), dur: 60, size: 10, taken: 6, price: 5, level: "Mixed", org: "Nikos K.", notes: "Indoor hall. Bring a light and a dark shirt." },
+    { id: "g5", city: "Larnaca", venue: "Larnaca Seafront Courts", area: "Finikoudes", t: at(2, 18, 30), dur: 60, size: 10, taken: 3, price: 5, level: "Casual", org: "Stella P.", notes: "Friendly game, mixed teams." },
+    { id: "g6", city: "Limassol", venue: "Agios Athanasios Arena", area: "Agios Athanasios", t: at(2, 21, 0), dur: 60, size: 10, taken: 9, price: 6, level: "Competitive", org: "Alex M.", notes: "Fast game. Last spot usually goes quickly." },
+    { id: "g7", city: "Nicosia", venue: "Aglantzia Futsal Park", area: "Aglantzia", t: at(3, 19, 30), dur: 60, size: 10, taken: 4, price: 5, level: "Mixed", org: "George L.", notes: "Near the university. Parking at the back." },
+    { id: "g8", city: "Paphos", venue: "Kato Paphos Indoor", area: "Kato Paphos", t: at(4, 20, 0), dur: 60, size: 10, taken: 7, price: 5, level: "Mixed", org: "Panos C.", notes: "Indoor, air-conditioned." }
+  ];
+  games.forEach(function (g, i) { g.players = NAMES.slice(i, i + g.taken); g.mine = false; });
+
+  var state = { tab: "games", city: "All", open: null };
+  var view = document.getElementById("view");
+
+  function fmtTime(ts) { var d = new Date(ts); return String(d.getHours()).padStart(2, "0") + ":" + String(d.getMinutes()).padStart(2, "0"); }
+  function dayLabel(ts) {
+    var d = new Date(ts), today = new Date(); today.setHours(0, 0, 0, 0);
+    var diff = Math.round((new Date(d).setHours(0, 0, 0, 0) - today.getTime()) / DAY);
+    if (diff === 0) return "Today"; if (diff === 1) return "Tomorrow";
+    return d.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "short" });
+  }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+
+  function gameRow(g) {
+    var left = g.size - g.taken, full = left <= 0;
+    var status = g.mine ? '<span class="game__left mine">You’re in</span>' : full ? '<span class="game__left full">Full</span>' : '<span class="game__left">' + left + (left === 1 ? " spot" : " spots") + " left</span>";
+    return '<div class="game" data-id="' + g.id + '" role="button" tabindex="0">' +
+      '<div class="game__time">' + fmtTime(g.t) + "<small>" + g.dur + " min</small></div>" +
+      "<div><div class=\"game__venue\">" + esc(g.venue) + '</div><div class="game__sub">' + esc(g.area) + " · " + (g.size / 2) + "v" + (g.size / 2) + " · " + g.level + "</div>" +
+      '<div class="spots' + (full ? " full" : "") + '"><i style="width:' + Math.min(100, g.taken / g.size * 100) + '%"></i></div></div>' +
+      '<div class="game__right"><div class="game__price">€' + g.price + "</div>" + status + "</div></div>";
+  }
+  function bindRows() {
+    view.querySelectorAll(".game").forEach(function (el) {
+      var go = function () { openGame(el.dataset.id); };
+      el.addEventListener("click", go);
+      el.addEventListener("keydown", function (e) { if (e.key === "Enter") go(); });
+    });
+  }
+  function grouped(list) {
+    var out = "", last = "";
+    list.sort(function (a, b) { return a.t - b.t; }).forEach(function (g) {
+      var dl = dayLabel(g.t); if (dl !== last) { out += '<div class="day">' + dl + "</div>"; last = dl; }
+      out += gameRow(g);
+    });
+    return out;
+  }
+
+  function viewGames() {
+    var cities = ["All", "Nicosia", "Limassol", "Larnaca", "Paphos"];
+    var list = games.filter(function (g) { return state.city === "All" || g.city === state.city; });
+    view.innerHTML =
+      '<div class="top"><div class="brand">Futsal<i>aki</i></div><div class="avatar">IT</div></div>' +
+      '<div class="hello">Kalispera, <b>Ioannis</b>. ' + games.filter(function (g) { return g.size - g.taken > 0; }).length + " games with open spots this week.</div>" +
+      '<div class="cities">' + cities.map(function (c) { return '<button class="pill" data-city="' + c + '" aria-pressed="' + (state.city === c) + '">' + c + "</button>"; }).join("") + "</div>" +
+      (list.length ? grouped(list) : '<div class="empty"><b>No games yet</b>Be the first to organise one in ' + state.city + ".</div>") +
+      '<div style="height:24px"></div>';
+    view.querySelectorAll(".pill").forEach(function (b) { b.onclick = function () { state.city = b.dataset.city; viewGames(); }; });
+    bindRows();
+  }
+
+  function viewMine() {
+    var list = games.filter(function (g) { return g.mine || g.createdByYou; });
+    view.innerHTML = '<div class="top"><div class="brand">My games</div><div class="avatar">IT</div></div>' +
+      (list.length ? grouped(list) : '<div class="empty"><b>Nothing booked</b>Join a game from the Games tab and it shows up here.</div>');
+    bindRows();
+  }
+
+  function pitchSVG() {
+    return '<svg viewBox="0 0 390 210" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' +
+      '<defs><pattern id="stripes" width="60" height="210" patternUnits="userSpaceOnUse"><rect width="30" height="210" fill="#1b5a3b"/><rect x="30" width="30" height="210" fill="#185236"/></pattern></defs>' +
+      '<rect width="390" height="210" fill="url(#stripes)"/>' +
+      '<g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2"><rect x="20" y="20" width="350" height="170"/><line x1="195" y1="20" x2="195" y2="190"/><circle cx="195" cy="105" r="30"/>' +
+      '<path d="M20 60 a45 45 0 0 1 0 90"/><path d="M370 60 a45 45 0 0 0 0 90"/></g><circle cx="195" cy="105" r="3" fill="rgba(255,255,255,.7)"/></svg>';
+  }
+
+  function openGame(id) {
+    var g = games.find(function (x) { return x.id === id; }); if (!g) return;
+    state.open = id;
+    var left = g.size - g.taken, full = left <= 0;
+    var slots = g.players.map(function (p) { return '<div class="p">' + p + "</div>"; }).join("");
+    if (g.mine) slots += '<div class="p you">IT</div>';
+    for (var i = 0; i < left; i++) slots += '<div class="p open">+</div>';
+    view.innerHTML =
+      '<div class="hero">' + pitchSVG() + '<button class="hero__back" id="back" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="m15 18-6-6 6-6"/></svg></button>' +
+      '<span class="hero__tag">' + (g.size / 2) + "v" + (g.size / 2) + " · " + g.level + "</span></div>" +
+      '<div class="d-body"><h1 class="d-title">' + esc(g.venue) + '</h1><p class="d-sub">' + dayLabel(g.t) + ", " + fmtTime(g.t) + " · " + esc(g.area) + ", " + g.city + "</p>" +
+      '<div class="facts"><div><b>' + g.dur + "'</b><span>Duration</span></div><div><b>" + g.taken + "/" + g.size + "</b><span>Players</span></div><div><b>€" + g.price + "</b><span>Per player</span></div></div>" +
+      '<p class="h"><span>Who’s playing</span><span>' + (full ? "Full" : left + " open") + "</span></p>" +
+      '<div class="players">' + slots + "</div>" +
+      '<p class="h"><span>From the organiser</span></p><p class="notes">' + esc(g.notes) + "</p>" +
+      '<div class="org"><div class="p">' + g.org.split(" ").map(function (s) { return s[0]; }).join("") + "</div><div><b>" + esc(g.org) + "</b>Organiser · free cancellation up to 6 hours before</div></div></div>" +
+      '<div class="cta"><div class="cta__price">€' + g.price + ".00<small>per player</small></div>" +
+      (g.mine ? '<button class="btn btn-dark" id="leave">Leave game</button>' :
+        '<button class="btn btn-lime" id="join"' + (full ? " disabled" : "") + ">" + (full ? "Game is full" : "Join game") + "</button>") + "</div>";
+    view.scrollTop = 0;
+    document.getElementById("back").onclick = function () { state.open = null; renderTab(); };
+    var j = document.getElementById("join"); if (j && !full) j.onclick = function () { openPay(g); };
+    var l = document.getElementById("leave"); if (l) l.onclick = function () {
+      g.mine = false; g.taken--; toast("You left the game · €" + g.price + " refunded"); openGame(g.id);
+    };
+  }
+
+  var sheet = document.getElementById("sheet"), scrim = document.getElementById("scrim"), done = document.getElementById("done");
+  function openPay(g) {
+    var fee = 0.5;
+    sheet.innerHTML = '<div class="grab"></div><h3>Confirm your spot</h3><p class="muted">' + esc(g.venue) + " · " + dayLabel(g.t) + " " + fmtTime(g.t) + "</p>" +
+      '<div class="line"><span>Game fee</span><span>€' + g.price.toFixed(2) + '</span></div><div class="line"><span>Service fee</span><span>€' + fee.toFixed(2) + "</span></div>" +
+      '<div class="line total"><span>Total</span><span>€' + (g.price + fee).toFixed(2) + "</span></div>" +
+      '<div class="card-field"><span>💳</span><span>Visa •••• 4242</span><span>Change</span></div>' +
+      '<button class="btn paybtn" id="pay">Pay €' + (g.price + fee).toFixed(2) + "</button>" +
+      '<p class="secure">Demo — no real payment. In the app this is Stripe.</p>';
+    sheet.classList.add("open"); scrim.classList.add("open");
+    var payNow = function (b) {
+      b.disabled = true; b.textContent = "Processing…";
+      setTimeout(function () {
+        closePay(); g.mine = true; g.taken++;
+        done.innerHTML = '<div class="tick"><svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"/></svg></div>' +
+          "<h2>You’re in</h2><p>" + esc(g.venue) + "<br>" + dayLabel(g.t) + " at " + fmtTime(g.t) + '</p><button class="btn btn-lime" id="ok">See the game</button>';
+        done.classList.add("open");
+        document.getElementById("ok").onclick = function () { done.classList.remove("open"); openGame(g.id); };
+      }, 900);
+    };
+    document.getElementById("pay").onclick = function () { payNow(this); };
+  }
+  function closePay() { sheet.classList.remove("open"); scrim.classList.remove("open"); }
+  scrim.onclick = closePay;
+
+  function viewCreate() {
+    var tomorrow = new Date(Date.now() + DAY), iso = tomorrow.toISOString().slice(0, 10);
+    view.innerHTML = '<form class="form" id="cf" autocomplete="off"><h2>Organise a game</h2><p class="lead">Players pay when they join. You get paid out automatically after the game.</p>' +
+      '<div class="f"><label for="cv">Venue</label><input class="in" id="cv" required placeholder="e.g. Strovolos Indoor Arena"></div>' +
+      '<div class="two"><div class="f"><label for="cc">City</label><select class="in" id="cc"><option>Nicosia</option><option>Limassol</option><option>Larnaca</option><option>Paphos</option></select></div>' +
+      '<div class="f"><label for="cl">Level</label><select class="in" id="cl"><option>Mixed</option><option>Casual</option><option>Intermediate</option><option>Competitive</option></select></div></div>' +
+      '<div class="two"><div class="f"><label for="cd">Date</label><input class="in" id="cd" type="date" value="' + iso + '" required></div>' +
+      '<div class="f"><label for="ct">Time</label><input class="in" id="ct" type="time" value="20:00" required></div></div>' +
+      '<div class="two"><div class="f"><label for="cs">Format</label><select class="in" id="cs"><option value="10">5 v 5</option><option value="12">6 v 6</option><option value="14">7 v 7</option></select></div>' +
+      '<div class="f"><label for="cp">Price per player (€)</label><input class="in" id="cp" type="number" min="0" max="50" value="5" required></div></div>' +
+      '<p class="payout" id="payout"></p>' +
+      '<button class="btn btn-lime" style="width:100%" type="submit">Publish game</button></form>';
+    var upd = function () {
+      var n = +document.getElementById("cs").value, p = +document.getElementById("cp").value || 0;
+      document.getElementById("payout").innerHTML = "Full game: <b>" + n + " players × €" + p + " = €" + (n * p) + "</b> to you, paid to your bank via Stripe.";
+    };
+    document.getElementById("cs").onchange = upd; document.getElementById("cp").oninput = upd; upd();
+    document.getElementById("cf").onsubmit = function (e) {
+      e.preventDefault();
+      var d = document.getElementById("cd").value.split("-"), tm = document.getElementById("ct").value.split(":");
+      var when = new Date(+d[0], +d[1] - 1, +d[2], +tm[0], +tm[1]).getTime();
+      var g = { id: "n" + Date.now(), city: document.getElementById("cc").value, venue: document.getElementById("cv").value.trim() || "My game", area: document.getElementById("cc").value,
+        t: when, dur: 60, size: +document.getElementById("cs").value, taken: 1, price: +document.getElementById("cp").value || 0, level: document.getElementById("cl").value,
+        org: "Ioannis T.", notes: "New game — invite your friends.", players: [], mine: true, createdByYou: true };
+      games.push(g); toast("Game published"); setTab("games"); openGame(g.id);
+    };
+  }
+
+  var toastEl = document.getElementById("toast"), tt;
+  function toast(m) { toastEl.textContent = m; toastEl.classList.add("show"); clearTimeout(tt); tt = setTimeout(function () { toastEl.classList.remove("show"); }, 2000); }
+
+  function renderTab() { if (state.tab === "games") viewGames(); else if (state.tab === "mine") viewMine(); else viewCreate(); view.scrollTop = 0; }
+  function setTab(tab) {
+    state.tab = tab; state.open = null;
+    document.querySelectorAll("[data-tab]").forEach(function (b) { b.setAttribute("aria-current", String(b.dataset.tab === tab)); });
+    renderTab();
+  }
+  document.querySelectorAll("[data-tab]").forEach(function (b) { b.onclick = function () { setTab(b.dataset.tab); }; });
+
+  var clock = document.getElementById("clock");
+  function tick() { clock.textContent = fmtTime(Date.now()); } tick(); setInterval(tick, 30000);
+
+  renderTab();
+})();
+</script>
+</body>
+</html>
