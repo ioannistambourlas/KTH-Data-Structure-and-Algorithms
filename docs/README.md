@@ -1,28 +1,29 @@
-# ioannistambourlas — personal site
+# Ioannis Tambourlas — portfolio
 
 Plain HTML and CSS, no build step. Served by GitHub Pages from this `docs/` folder.
 
 ```
 docs/
-├── index.html                   the site
+├── index.html                    the portfolio
 ├── styles.css
+├── Ioannis-Tambourlas-CV.pdf     résumé linked from the site (generated from cv.html)
+├── cv.html                       source for the PDF (A4, print-ready)
 ├── assets/
 │   ├── favicon.svg
-│   └── portrait.jpg             ← add your photo here (4:5, ~800×1000)
+│   ├── portrait.jpg              ← add your photo here (4:5, ~900×1125)
+│   └── shots/                    project screenshots, taken from the demos
 └── demos/
-    ├── futsalaki/               interactive Futsalaki demo (sample data)
-    └── student-market/          interactive SSSB Market demo (sample data)
+    ├── futsalaki/                Futsalaki venue dashboard — interactive, sample data
+    └── student-market/           SSSB Market — interactive, sample data
 ```
 
 ## Photo
 
-Save your LinkedIn / CV photo as `docs/assets/portrait.jpg`. Until it exists the page shows an "IT" monogram in the same spot.
+Save your headshot as `docs/assets/portrait.jpg`. Until it exists the hero shows an empty photo frame.
 
 ## Publish
 
 Repo → Settings → Pages → Source: *Deploy from a branch* → Branch `main`, folder `/docs`.
-The site appears at `https://ioannistambourlas.github.io/KTH-Data-Structure-and-Algorithms/`.
-A custom domain can be added on the same settings page.
 
 ## Preview locally
 
@@ -30,4 +31,4 @@ A custom domain can be added on the same settings page.
 cd docs && python3 -m http.server 8000   # http://localhost:8000
 ```
 
-The demos run entirely in the browser. Listings you post in the market demo are kept in your browser's localStorage only.
+Both demos run entirely in the browser; nothing is sent to a server.

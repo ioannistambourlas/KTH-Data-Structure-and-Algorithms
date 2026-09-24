@@ -4,307 +4,371 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ioannis Tambourlas</title>
-  <meta name="description" content="Ioannis Tambourlas builds websites for small businesses in Stockholm — 4 000 kr, fixed price. Computer science student at KTH, co-founder of Futsalaki.">
+  <meta name="description" content="Ioannis Tambourlas — software developer, Computer Science student at KTH, co-founder of Futsalaki and badminton player for Cyprus.">
   <meta property="og:title" content="Ioannis Tambourlas">
-  <meta property="og:description" content="Websites for small businesses, 4 000 kr fixed price. CS student at KTH, Stockholm.">
-  <meta property="og:type" content="website">
-  <meta name="theme-color" content="#f3f0e8" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#151513" media="(prefers-color-scheme: dark)">
+  <meta property="og:description" content="Software developer at KTH, co-founder of Futsalaki, badminton player for Cyprus.">
+  <meta property="og:type" content="profile">
+  <meta property="og:image" content="assets/shots/futsalaki-calendar.jpg">
+  <meta name="theme-color" content="#f4f2ec">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<header class="top">
-  <div class="wrap top__inner">
-    <a class="top__name" href="#">Ioannis Tambourlas</a>
-    <nav class="top__nav" aria-label="Main">
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="nav__name" href="#top">Ioannis Tambourlas</a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav class="nav__links" id="menu" aria-label="Main">
       <a href="#work">Work</a>
-      <a href="#websites">Websites</a>
       <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#badminton">Badminton</a>
       <a href="#contact">Contact</a>
+      <a class="nav__cv" href="Ioannis-Tambourlas-CV.pdf" download>Résumé</a>
     </nav>
   </div>
 </header>
 
-<main>
+<main id="top">
 
-  <section class="intro wrap">
-    <div class="intro__text">
-      <p class="eyebrow">Stockholm &middot; Nicosia</p>
-      <h1>I build websites for small businesses, and apps for the people I play sport with.</h1>
-      <p class="lede">
-        I&rsquo;m Ioannis, a computer science student at KTH. Right now I&rsquo;m co-building
-        <a href="#futsalaki">Futsalaki</a>, an app for pickup futsal games in Cyprus, and
-        <a href="#sssb-market">SSSB Market</a>, where students in Stockholm sell furniture to each other.
-        If your business needs a website, I make them for a fixed <strong>4&nbsp;000&nbsp;kr</strong>.
-      </p>
-      <p class="status"><span class="dot" aria-hidden="true"></span> Taking on new website projects this autumn.</p>
-      <p class="intro__actions">
-        <a class="link-arrow" href="#websites">What you get for 4 000 kr</a>
-        <a class="link-arrow" href="mailto:ioannis.tambourlas@gmail.com?subject=Website%20for%20my%20business">Email me</a>
-      </p>
+  <!-- ================= HERO ================= -->
+  <section class="hero wrap">
+    <p class="hero__kicker"><span>Software developer</span><span>Badminton player</span><span>Stockholm</span></p>
+
+    <div class="hero__grid">
+      <h1 class="hero__name">Ioannis<br>Tambourlas</h1>
+
+      <!-- Photo: save your LinkedIn/CV headshot as docs/assets/portrait.jpg (4:5, ~900×1125). -->
+      <figure class="portrait">
+        <img src="assets/portrait.jpg" alt="Portrait of Ioannis Tambourlas" width="900" height="1125"
+             onerror="this.parentNode.classList.add('portrait--empty'); this.remove();">
+        <span class="portrait__empty" aria-hidden="true">Photo</span>
+      </figure>
+
+      <div class="hero__intro">
+        <p>
+          Computer Science student at KTH, co-founder of <a href="#futsalaki">Futsalaki</a>,
+          and a badminton player on the Cyprus national team since 2019.
+          I build software that people actually use &mdash; and I care most about the parts that have to be right:
+          payments, data and reliability.
+        </p>
+        <p class="hero__cta">
+          <a class="btn" href="#work">See my work</a>
+          <a class="btn btn--ghost" href="Ioannis-Tambourlas-CV.pdf" download>Download résumé</a>
+        </p>
+      </div>
     </div>
 
-    <!-- Portrait: save your LinkedIn/CV photo as docs/assets/portrait.jpg (4:5, at least 800×1000). -->
-    <figure class="portrait">
-      <img src="assets/portrait.jpg" alt="Ioannis Tambourlas" width="800" height="1000"
-           onerror="this.parentNode.classList.add('portrait--empty'); this.remove();">
-      <span class="portrait__fallback" aria-hidden="true">IT</span>
-    </figure>
+    <ul class="hero__facts">
+      <li><b>2nd year</b>BSc Computer Science, KTH</li>
+      <li><b>Co-founder</b>Futsalaki, Cyprus</li>
+      <li><b>2019</b>Cyprus national team debut</li>
+      <li><b>Summer 2027</b>open to internships</li>
+    </ul>
   </section>
 
-  <!-- ============ WORK ============ -->
-  <section id="work" class="section wrap">
-    <h2 class="section__label">Selected work</h2>
+  <!-- ================= WORK ================= -->
+  <section class="section wrap" id="work">
+    <div class="section__head">
+      <p class="label">Selected work</p>
+      <h2>Things I&rsquo;ve built</h2>
+    </div>
 
-    <ol class="projects">
+    <!-- Futsalaki -->
+    <article class="work" id="futsalaki">
+      <a class="work__media" href="demos/futsalaki/" aria-label="Open the Futsalaki venue dashboard demo">
+        <img src="assets/shots/futsalaki-calendar.jpg" alt="Futsalaki venue dashboard — weekly calendar per pitch" width="2160" height="1350" loading="lazy">
+      </a>
+      <div class="work__strip">
+        <a href="demos/futsalaki/#overview"><img src="assets/shots/futsalaki-overview.jpg" alt="Dashboard overview with today's schedule" width="2160" height="1350" loading="lazy"></a>
+        <a href="demos/futsalaki/#matchmaking"><img src="assets/shots/futsalaki-matchmaking.jpg" alt="Matchmaking pool of teams waiting for an opponent" width="2160" height="1350" loading="lazy"></a>
+      </div>
 
-      <li class="project" id="futsalaki">
-        <div class="project__meta">
-          <span class="project__num">01</span>
-          <span>2026 &ndash; now</span>
-          <span>Co-founder</span>
-        </div>
-        <div class="project__body">
+      <div class="work__body">
+        <div class="work__title">
+          <span class="work__num">01</span>
           <h3>Futsalaki</h3>
+          <p class="work__sub">Matchmaking and pitch booking for futsal in Cyprus</p>
+        </div>
+        <div class="work__text">
           <p>
-            A mobile app for organising and joining pickup futsal games in Cyprus. Players find a game near them,
-            grab a spot and pay in the app. Organisers stop chasing people for cash on WhatsApp &mdash; the money
-            reaches them automatically.
+            A team says when it wants to play and at what level. Futsalaki finds an opponent with an overlapping time
+            window, reserves a free pitch and takes payment &mdash; no group chats, no phoning around. Players use the
+            iOS and Android app; venues run everything from a web dashboard with a calendar per pitch, the matchmaking
+            pool, walk-in bookings, 7-a-side pitch combinations, revenue and payouts.
           </p>
           <p>
-            I run the company with Panayiotis Charalambous. On the engineering side I&rsquo;ve spent most of my time on
-            the parts users never see but would notice if they broke: the payment flow, database permissions,
-            rate limiting, error monitoring, and a CI pipeline that won&rsquo;t let a leaked key reach production.
+            I co-founded the company with Panayiotis Charalambous. On the engineering side I focus on money and
+            reliability: the Stripe Connect flow (payments, venue payouts, automatic refunds), database security and
+            performance, rate limiting, monitoring and the CI pipeline.
           </p>
-          <p class="stack">React Native (Expo) &middot; Supabase / Postgres &middot; Stripe Connect &middot; Google sign-in &middot; GitHub Actions</p>
-          <p class="project__links">
-            <a class="link-arrow" href="demos/futsalaki/">Open the demo</a>
-            <a class="link-ext" href="https://futsalaki.com" rel="noopener">futsalaki.com</a>
+          <dl class="work__meta">
+            <dt>Role</dt><dd>Co-founder &amp; engineer</dd>
+            <dt>Year</dt><dd>2026 &ndash; present</dd>
+            <dt>Stack</dt><dd>TypeScript, Next.js, React Native (Expo), Supabase, Stripe Connect, GitHub Actions</dd>
+          </dl>
+          <p class="work__links">
+            <a class="arrow" href="demos/futsalaki/">Open the live demo</a>
+            <a class="ext" href="https://futsalaki.com" rel="noopener">futsalaki.com</a>
           </p>
         </div>
-        <a class="project__preview project__preview--phone" href="demos/futsalaki/" aria-label="Open the Futsalaki demo">
-          <iframe src="demos/futsalaki/?embed" title="Futsalaki demo preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
-        </a>
-      </li>
+      </div>
+    </article>
 
-      <li class="project" id="sssb-market">
-        <div class="project__meta">
-          <span class="project__num">02</span>
-          <span>2026</span>
-          <span>Co-developer</span>
-        </div>
-        <div class="project__body">
+    <!-- SSSB Market -->
+    <article class="work" id="sssb-market">
+      <a class="work__media work__media--phones" href="demos/student-market/" aria-label="Open the SSSB Market demo">
+        <img src="assets/shots/market-board.jpg" alt="SSSB Market board with categories and listings" width="780" height="1560" loading="lazy">
+        <img src="assets/shots/market-listing.jpg" alt="A listing with price, condition and WhatsApp contact" width="780" height="1560" loading="lazy">
+        <img src="assets/shots/market-sell.jpg" alt="The sell form" width="780" height="1560" loading="lazy">
+      </a>
+
+      <div class="work__body">
+        <div class="work__title">
+          <span class="work__num">02</span>
           <h3>SSSB Market</h3>
+          <p class="work__sub">Second-hand furniture between students in Stockholm</p>
+        </div>
+        <div class="work__text">
           <p>
-            Every August thousands of students move into SSSB housing in Stockholm and every June they move out,
-            and the furniture mostly ends up in the bin room. SSSB Market is a board where they sell it to each other
-            instead, starting with Lappis.
+            Students in SSSB housing move in every August and out every June, and most of the furniture ends up in the
+            bin room. SSSB Market lets them sell it to each other instead, starting with Lappis. Posting takes a minute
+            and needs no account: photos, a price and a WhatsApp number.
           </p>
           <p>
-            Posting takes a minute and needs no account: a few photos, a price, a WhatsApp number. Buyers tap to chat.
-            The seller gets a private link to edit the listing or mark it sold, and old listings disappear after
-            60&nbsp;days so the board stays current. Photos are compressed on the phone before upload, posting is
-            rate-limited, and there&rsquo;s a small moderation page. English and Swedish. Built with Antreas Patsiantos.
+            Sellers get a private link to edit or mark an item sold, listings expire after 60 days, photos are
+            compressed on the phone before upload, and posting is rate-limited. English and Swedish, with a small
+            moderation panel. Built with Antreas Patsiantos.
           </p>
-          <p class="stack">Next.js &middot; React &middot; TypeScript &middot; Prisma &middot; Supabase (Postgres + Storage) &middot; Tailwind</p>
-          <p class="project__links">
-            <a class="link-arrow" href="demos/student-market/">Open the demo</a>
+          <dl class="work__meta">
+            <dt>Role</dt><dd>Co-developer</dd>
+            <dt>Year</dt><dd>2026</dd>
+            <dt>Stack</dt><dd>TypeScript, Next.js, React, Prisma, PostgreSQL (Supabase), Tailwind CSS</dd>
+          </dl>
+          <p class="work__links">
+            <a class="arrow" href="demos/student-market/">Open the live demo</a>
           </p>
         </div>
-        <a class="project__preview project__preview--phone" href="demos/student-market/" aria-label="Open the SSSB Market demo">
-          <iframe src="demos/student-market/?embed" title="SSSB Market demo preview" loading="lazy" tabindex="-1" scrolling="no"></iframe>
-        </a>
-      </li>
+      </div>
+    </article>
 
-      <li class="project project--text" id="courtsense">
-        <div class="project__meta">
-          <span class="project__num">03</span>
-          <span>In progress</span>
-          <span>Solo</span>
-        </div>
-        <div class="project__body">
-          <h3>CourtSense <span class="tag">Badminton AI coach</span></h3>
-          <p>
-            Film a rally on your phone, get back an honest account of how you moved. CourtSense tracks the player&rsquo;s
-            pose frame by frame, calibrates the court automatically so positions map onto real court coordinates,
-            and turns that into footwork and coverage stats. A language model then writes the feedback a coach would give.
-          </p>
-          <p>
-            I&rsquo;ve played badminton for Cyprus for years and been told what my footwork looks like more times than
-            I can count. I wanted to see it for myself.
-          </p>
-          <p class="stack">Python &middot; FastAPI &middot; OpenCV &middot; pose estimation &middot; Claude API</p>
-          <p class="project__links"><span class="muted">Demo when it&rsquo;s ready.</span></p>
-        </div>
-      </li>
+    <!-- Other work -->
+    <div class="more">
+      <p class="label">Also</p>
+      <ul class="more__list">
+        <li>
+          <span class="more__year">In progress</span>
+          <div>
+            <h3>CourtSense</h3>
+            <p>Badminton video analysis. Player detection, pose estimation and automatic court calibration turn a phone
+              video into footwork and court-coverage stats, and an LLM writes the coaching feedback.</p>
+            <p class="more__stack">Python &middot; FastAPI &middot; OpenCV &middot; YOLOv8 &middot; MediaPipe &middot; Claude API</p>
+          </div>
+        </li>
+        <li>
+          <span class="more__year">2026</span>
+          <div>
+            <h3><a class="ext" href="https://github.com/ioannistambourlas/KTH-Data-Structure-and-Algorithms" rel="noopener">Algorithms &amp; data structures in C</a></h3>
+            <p>Stacks, trees, heaps, hash tables and graphs from scratch, with benchmarks &mdash; including fastest-route
+              search over the Swedish and European rail networks with Dijkstra&rsquo;s algorithm.</p>
+            <p class="more__stack">C &middot; KTH coursework</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-      <li class="project project--text" id="algorithms">
-        <div class="project__meta">
-          <span class="project__num">04</span>
-          <span>2026</span>
-          <span>KTH coursework</span>
-        </div>
-        <div class="project__body">
-          <h3>Algorithms &amp; data structures in C</h3>
-          <p>
-            Stacks, binary search trees, heaps, hash tables and graphs, written from scratch with no libraries and
-            benchmarked against each other. The graph assignment finds the fastest train route between any two
-            stations in Sweden and across Europe using Dijkstra&rsquo;s algorithm; the hashing one looks up every
-            Swedish postcode.
-          </p>
-          <p class="stack">C &middot; benchmarking &middot; Dijkstra &middot; hashing &middot; priority queues</p>
-          <p class="project__links">
-            <a class="link-ext" href="https://github.com/ioannistambourlas/KTH-Data-Structure-and-Algorithms" rel="noopener">Source on GitHub</a>
-          </p>
-        </div>
-      </li>
+  <!-- ================= ABOUT ================= -->
+  <section class="section wrap about" id="about">
+    <div class="section__head">
+      <p class="label">About</p>
+      <h2>From Nicosia to Stockholm</h2>
+    </div>
+    <div class="about__grid">
+      <div class="about__text">
+        <p class="big">
+          I grew up in Cyprus playing badminton at a level that didn&rsquo;t leave much time for anything else &mdash;
+          and still finished school with 19.2 out of 20.
+        </p>
+        <p>
+          In 2025 I moved to Stockholm to study Computer Science and Engineering at KTH. My first year covered the
+          fundamentals &mdash; algorithms and data structures in C, digital design, embedded electronics, discrete
+          mathematics &mdash; and I spent the rest of my time turning ideas into products with friends.
+        </p>
+        <p>
+          Sport taught me the habits I bring to software: commit to long goals, manage time under pressure, look at
+          the result honestly and do the next repetition. I&rsquo;m now looking for a software engineering internship
+          for summer 2027.
+        </p>
+      </div>
+      <dl class="about__facts">
+        <dt>Based in</dt><dd>Stockholm, Sweden</dd>
+        <dt>From</dt><dd>Nicosia, Cyprus</dd>
+        <dt>Studying</dt><dd>BSc Computer Science and Engineering, KTH, 2025&ndash;2028</dd>
+        <dt>Building</dt><dd>Futsalaki, CourtSense</dd>
+        <dt>Languages</dt><dd>Greek (native), English (C1, IELTS 7.5)</dd>
+      </dl>
+    </div>
+  </section>
 
+  <!-- ================= EXPERIENCE ================= -->
+  <section class="section wrap" id="experience">
+    <div class="section__head">
+      <p class="label">Experience</p>
+      <h2>Where I&rsquo;ve spent my time</h2>
+    </div>
+    <ol class="rows">
+      <li>
+        <span class="rows__when">2026 &ndash; now</span>
+        <div class="rows__what"><h3>Co-founder &amp; engineer</h3><p class="rows__org">Futsalaki Ltd &middot; Nicosia</p></div>
+        <p class="rows__desc">Two-sided product &mdash; player app and venue dashboard. Payments on Stripe Connect, and an engineering review of database performance, privileges, rate limiting, monitoring and CI.</p>
+      </li>
+      <li>
+        <span class="rows__when">2026</span>
+        <div class="rows__what"><h3>Co-developer</h3><p class="rows__org">SSSB Market &middot; Stockholm</p></div>
+        <p class="rows__desc">Full-stack Next.js marketplace with Postgres, image storage, bilingual UI and moderation.</p>
+      </li>
+      <li>
+        <span class="rows__when">2023 &ndash; now</span>
+        <div class="rows__what"><h3>Athlete representative</h3><p class="rows__org">Cyprus Olympic Committee</p></div>
+        <p class="rows__desc">Elected by the national badminton athletes as their official representative to the committee.</p>
+      </li>
+    </ol>
+
+    <div class="section__head section__head--sub">
+      <p class="label">Education</p>
+    </div>
+    <ol class="rows">
+      <li>
+        <span class="rows__when">2025 &ndash; 2028</span>
+        <div class="rows__what"><h3>BSc Computer Science and Engineering</h3><p class="rows__org">KTH Royal Institute of Technology &middot; Stockholm</p></div>
+        <p class="rows__desc">Programming (Java), Data Structures &amp; Algorithms (C), Digital Design, Embedded Electronics, Discrete Mathematics, Calculus, Linear Algebra.</p>
+      </li>
+      <li>
+        <span class="rows__when">2021 &ndash; 2024</span>
+        <div class="rows__what"><h3>Upper Secondary School Diploma</h3><p class="rows__org">Kykkos B&rsquo; Lyceum &middot; Nicosia</p></div>
+        <p class="rows__desc">Final grade 19.20 / 20 &mdash; Excellent.</p>
+      </li>
     </ol>
   </section>
 
-  <!-- ============ WEBSITES ============ -->
-  <section id="websites" class="section wrap">
-    <h2 class="section__label">Websites</h2>
-
-    <div class="offer">
-      <div class="offer__head">
-        <p class="price">4&nbsp;000&nbsp;kr</p>
-        <p class="price__note">Fixed price. One payment, after you&rsquo;ve seen the design.</p>
+  <!-- ================= BADMINTON ================= -->
+  <section class="court" id="badminton">
+    <svg class="court__lines" viewBox="0 0 1340 610" aria-hidden="true">
+      <rect x="1" y="1" width="1338" height="608"/>
+      <line x1="1" y1="46" x2="1339" y2="46"/><line x1="1" y1="564" x2="1339" y2="564"/>
+      <line x1="76" y1="1" x2="76" y2="609"/><line x1="1264" y1="1" x2="1264" y2="609"/>
+      <line x1="472" y1="1" x2="472" y2="609"/><line x1="868" y1="1" x2="868" y2="609"/>
+      <line x1="1" y1="305" x2="472" y2="305"/><line x1="868" y1="305" x2="1339" y2="305"/>
+      <line class="net" x1="670" y1="-40" x2="670" y2="650"/>
+    </svg>
+    <div class="wrap court__inner">
+      <div class="section__head">
+        <p class="label">Badminton</p>
+        <h2>Representing Cyprus<br>since 2019.</h2>
       </div>
+      <ol class="results">
+        <li><span>2023</span><p>Small States of Europe Team Championship, representing Cyprus</p><b>1st</b></li>
+        <li><span>2023</span><p>Cyprus National Championships &mdash; men&rsquo;s doubles</p><b>1st</b></li>
+        <li><span>2023</span><p>Cyprus National Championships &mdash; mixed doubles</p><b>1st</b></li>
+        <li><span>2023</span><p>Israel International Junior &mdash; men&rsquo;s doubles</p><b>2nd</b></li>
+      </ol>
+      <div class="court__notes">
+        <p><b>Asia Badminton Academy, Kuala Lumpur.</b> A two-month elite training residency.</p>
+        <p><b>Cyprus Olympic Committee.</b> Elected in 2023 by the national badminton athletes as their representative, and still serving.</p>
+      </div>
+    </div>
+  </section>
 
-      <div class="offer__body">
-        <p class="lede lede--small">
-          Most small businesses don&rsquo;t need an agency. They need a site that loads fast, looks like them,
-          shows up on Google and makes it easy to call, book or find the door. That&rsquo;s what I build.
-        </p>
+  <!-- ================= SKILLS ================= -->
+  <section class="section wrap" id="skills">
+    <div class="section__head">
+      <p class="label">Toolbox</p>
+      <h2>What I work with</h2>
+    </div>
+    <div class="tools">
+      <div><h3>Languages</h3><p>TypeScript<br>JavaScript<br>Python<br>C / C++<br>Java<br>SQL</p></div>
+      <div><h3>Web &amp; mobile</h3><p>Next.js<br>React<br>React Native (Expo)<br>Tailwind CSS</p></div>
+      <div><h3>Backend &amp; data</h3><p>PostgreSQL<br>Supabase<br>Prisma<br>FastAPI<br>Stripe Connect</p></div>
+      <div><h3>Also</h3><p>Git &amp; GitHub Actions<br>OpenCV, MediaPipe<br>pytest<br>Digital logic &amp; embedded</p></div>
+    </div>
+    <p class="certs">Certificates: IELTS Academic 7.5 (2023) &middot; Cambridge IGCSE English as a Second Language, A (2022) &middot; Pearson LCCI Level 3 Certificate in Accounting, Merit (2022)</p>
+  </section>
 
-        <h3 class="minor">Included</h3>
-        <ul class="ticks">
-          <li>Up to five pages, designed for your business &mdash; not a template with your logo on it</li>
-          <li>Works properly on phones, where most of your visitors are</li>
-          <li>Contact form, map, opening hours, menu or price list &mdash; whatever your customers look for</li>
-          <li>The basics for Google: page titles, descriptions, and linking up your Google Business profile</li>
-          <li>Help registering your domain and putting the site live</li>
-          <li>Two rounds of changes, and a short walkthrough so you can edit text yourself</li>
+  <!-- ================= CONTACT ================= -->
+  <section class="section wrap contact" id="contact">
+    <div class="section__head">
+      <p class="label">Contact</p>
+      <h2>Let&rsquo;s talk.</h2>
+    </div>
+    <div class="contact__grid">
+      <div>
+        <p class="contact__lead">Internships, projects, or a game of badminton in Stockholm &mdash; my inbox is open.</p>
+        <p class="contact__mail"><a href="mailto:ioannis.tambourlas@gmail.com">ioannis.tambourlas@gmail.com</a></p>
+        <ul class="contact__links">
+          <li><a class="ext" href="https://www.linkedin.com/in/ioannis-tambourlas-84197b3ab/" rel="noopener">LinkedIn</a></li>
+          <li><a class="ext" href="https://github.com/ioannistambourlas" rel="noopener">GitHub</a></li>
+          <li><a class="arrow" href="Ioannis-Tambourlas-CV.pdf" download>Résumé (PDF)</a></li>
         </ul>
-
-        <h3 class="minor">How it goes</h3>
-        <ol class="steps">
-          <li><span>Call</span> Twenty minutes, free. You tell me about the business; I ask a lot of questions.</li>
-          <li><span>Design</span> Within a week you get a first version of the homepage to react to.</li>
-          <li><span>Build</span> I build the rest and we go through the changes together.</li>
-          <li><span>Launch</span> The site goes live on your domain. Usually two to three weeks from the first call.</li>
-        </ol>
-
-        <p class="fine">
-          Need online booking, payments or a shop? I&rsquo;ve built all three &mdash; the two demos above are real examples.
-          Those are quoted separately. Domain and hosting are paid by you directly, usually a few hundred kronor a year.
-        </p>
-
-        <p><a class="link-arrow" href="mailto:ioannis.tambourlas@gmail.com?subject=Website%20for%20my%20business">Book the free call</a></p>
       </div>
-    </div>
-  </section>
-
-  <!-- ============ ABOUT ============ -->
-  <section id="about" class="section wrap">
-    <h2 class="section__label">About</h2>
-
-    <div class="about">
-      <div class="about__story">
-        <p>
-          I grew up in Nicosia and moved to Stockholm in 2025 to study Computer Science and Engineering at KTH.
-        </p>
-        <p>
-          Before that, most of my waking hours went into badminton. I&rsquo;ve competed for Cyprus since 2019,
-          won the Small States of Europe team championship in 2023, and spent two months training at the
-          Asia Badminton Academy in Kuala Lumpur. The national team athletes elected me as their representative
-          to the Cyprus Olympic Committee, which I still am.
-        </p>
-        <p>
-          Sport left me with one habit that turns out to matter a lot in software: do the boring repetitions,
-          then look honestly at the result. I finished school with 19.2 out of 20 while training at that level,
-          and I bring the same stubbornness to the things I build now.
-        </p>
-      </div>
-
-      <div class="cv">
-        <div class="cv__group">
-          <h3 class="minor">Education</h3>
-          <dl>
-            <dt>2025 &ndash; 2028</dt>
-            <dd><strong>KTH Royal Institute of Technology</strong>, Stockholm<br>
-              BSc Computer Science and Engineering<br>
-              <span class="muted">Algorithms &amp; data structures, digital design, embedded electronics, discrete mathematics, linear algebra, Java</span></dd>
-            <dt>2021 &ndash; 2024</dt>
-            <dd><strong>Kykkos B&rsquo; Lyceum</strong>, Nicosia<br>
-              Upper secondary diploma, 19.20 / 20</dd>
-          </dl>
-        </div>
-
-        <div class="cv__group">
-          <h3 class="minor">Work</h3>
-          <dl>
-            <dt>2026 &ndash; now</dt>
-            <dd><strong>Futsalaki</strong> &mdash; co-founder</dd>
-            <dt>2026 &ndash; now</dt>
-            <dd><strong>Freelance</strong> &mdash; websites for small businesses</dd>
-            <dt>2026</dt>
-            <dd><strong>SSSB Market</strong> &mdash; co-developer</dd>
-          </dl>
-        </div>
-
-        <div class="cv__group">
-          <h3 class="minor">Badminton</h3>
-          <dl>
-            <dt>2023 &ndash; now</dt>
-            <dd>Athlete representative, Cyprus Olympic Committee</dd>
-            <dt>2023</dt>
-            <dd>1st, Small States of Europe Team Championship</dd>
-            <dt>2023</dt>
-            <dd>National champion, men&rsquo;s doubles and mixed doubles</dd>
-            <dt>2023</dt>
-            <dd>2nd, men&rsquo;s doubles, Israel International Junior</dd>
-            <dt>2019 &ndash; now</dt>
-            <dd>Cyprus national team</dd>
-          </dl>
-        </div>
-
-        <div class="cv__group">
-          <h3 class="minor">Tools</h3>
-          <p>TypeScript, JavaScript, Python, C, C++, Java, SQL. Next.js, React, React Native, Tailwind. Supabase, Postgres, Prisma, FastAPI, Stripe. Git and GitHub Actions.</p>
-          <h3 class="minor">Languages</h3>
-          <p>Greek (native), English (C1 &mdash; IELTS 7.5)</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section id="contact" class="section wrap contact">
-    <h2 class="section__label">Contact</h2>
-    <div class="contact__body">
-      <p class="contact__lead">Have a business that needs a website, or a project you want to talk through? Write to me &mdash; I usually reply the same day.</p>
-      <p class="contact__mail"><a href="mailto:ioannis.tambourlas@gmail.com">ioannis.tambourlas@gmail.com</a></p>
-      <ul class="contact__links">
-        <li><a class="link-ext" href="https://www.linkedin.com/in/ioannis-tambourlas-84197b3ab/" rel="noopener">LinkedIn</a></li>
-        <li><a class="link-ext" href="https://github.com/ioannistambourlas" rel="noopener">GitHub</a></li>
-      </ul>
+      <form class="form" id="form" action="mailto:ioannis.tambourlas@gmail.com" method="get">
+        <label>Your name<input name="name" autocomplete="name" required></label>
+        <label>Your email<input name="email" type="email" autocomplete="email" required></label>
+        <label>Message<textarea name="message" rows="4" required></textarea></label>
+        <button class="btn" type="submit">Send message</button>
+        <p class="form__note">Opens your email app with the message filled in.</p>
+      </form>
     </div>
   </section>
 
 </main>
 
 <footer class="foot wrap">
-  <span>&copy; <span id="year">2026</span> Ioannis Tambourlas</span>
-  <span>Stockholm, Sweden</span>
+  <span>&copy; <span id="y">2026</span> Ioannis Tambourlas</span>
+  <span>Stockholm &middot; Nicosia</span>
 </footer>
 
-<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // Mobile menu
+  var toggle = document.querySelector('.nav__toggle'), menu = document.getElementById('menu');
+  toggle.addEventListener('click', function () {
+    var open = toggle.getAttribute('aria-expanded') !== 'true';
+    toggle.setAttribute('aria-expanded', String(open));
+    menu.classList.toggle('is-open', open);
+  });
+  menu.addEventListener('click', function (e) {
+    if (e.target.tagName === 'A') { toggle.setAttribute('aria-expanded', 'false'); menu.classList.remove('is-open'); }
+  });
+
+  // Header gets a hairline once the page scrolls
+  var nav = document.querySelector('.nav');
+  function onScroll() { nav.classList.toggle('is-scrolled', window.scrollY > 8); }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Contact form → prefilled email
+  document.getElementById('form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = e.target, name = f.elements.name.value.trim(), from = f.elements.email.value.trim(), msg = f.elements.message.value.trim();
+    var subject = 'Hello from ' + (name || 'your website');
+    var body = msg + '\n\n— ' + name + (from ? ' (' + from + ')' : '');
+    location.href = 'mailto:ioannis.tambourlas@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  });
+
+  // Gentle reveal on scroll
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var items = document.querySelectorAll('.work, .more, .about__grid, .rows li, .results li, .tools > div, .contact__grid');
+    items.forEach(function (el) { el.classList.add('reveal'); });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  }
+</script>
 </body>
 </html>

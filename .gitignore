@@ -11,3 +11,4 @@ fix.c
 fix1.c
 fixed1.c
 search.c
+!docs/*.pdf
