@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Futsalaki — Ioannis Tambourlas</title>
+  <meta name="description" content="Case study: Futsalaki, a matchmaking and pitch-booking platform for futsal in Cyprus — player app, venue dashboard and Stripe Connect payments.">
+  <meta property="og:title" content="Futsalaki — case study">
+  <meta property="og:image" content="../../assets/shots/futsalaki-calendar.jpg">
+  <meta name="theme-color" content="#f4f2ec">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav__inner">
+    <a class="nav__name" href="../../">Ioannis Tambourlas</a>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav class="nav__links" id="menu" aria-label="Main">
+      <a href="../../#work">Work</a>
+      <a href="../../#about">About</a>
+      <a href="../../#experience">Experience</a>
+      <a href="../../#badminton">Badminton</a>
+      <a href="../../#contact">Contact</a>
+      <a class="nav__cv" href="../../Ioannis-Tambourlas-CV.pdf" download>Résumé</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="case-hero">
+    <a class="case-back" href="../../#work">&larr; All work</a>
+    <p class="label">Case study 01</p>
+    <h1>Futsalaki</h1>
+    <p class="case-hero__sub">Matchmaking and pitch booking for futsal in Cyprus &mdash; from &ldquo;anyone free on Thursday?&rdquo; to a confirmed, paid game.</p>
+    <dl class="case-meta">
+      <div><dt>Role</dt><dd>Co-founder &amp; engineer</dd></div>
+      <div><dt>Timeline</dt><dd>2026 &ndash; present</dd></div>
+      <div><dt>Team</dt><dd>With Panayiotis Charalambous</dd></div>
+      <div><dt>Links</dt><dd><a href="../../demos/futsalaki/">Live demo</a> &middot; <a href="https://futsalaki.com" rel="noopener">futsalaki.com</a></dd></div>
+    </dl>
+  </section>
+
+  <a class="case-img" href="../../demos/futsalaki/" data-reveal>
+    <img src="../../assets/shots/futsalaki-calendar.jpg" alt="Venue dashboard: weekly calendar per pitch, colour-coded by matchmaking, manual, pending and blocked bookings" width="2160" height="1350">
+  </a>
+  <p class="case-cap">The venue calendar. Green are matches made by the app, blue are the venue&rsquo;s own bookings, yellow is a team still waiting for an opponent, red is a blocked pitch.</p>
+
+  <section class="case-sec" data-reveal>
+    <h2><span class="label">The problem</span>Half a team is not a game</h2>
+    <div class="case-sec__body">
+      <p class="big">Futsal in Cyprus runs on group chats. Someone books a pitch, then spends the week finding ten players &mdash; or a whole second team &mdash; and chasing everyone for their share.</p>
+      <p>Venues have the opposite problem: empty slots on weeknights, bookings taken over the phone and written on paper, and no-shows that cost them the hour. Both sides want the same thing, a full pitch at a time that works, but nothing connects them.</p>
+    </div>
+  </section>
+
+  <section class="case-sec" data-reveal>
+    <h2><span class="label">The product</span>Two apps, one pool</h2>
+    <div class="case-sec__body">
+      <p>Futsalaki is two products that share a backend: an app for teams and a dashboard for the venues they play at.</p>
+      <div class="split">
+        <div>
+          <h3>For teams &mdash; iOS &amp; Android</h3>
+          <ul>
+            <li>Sign in with Google and create a team with a skill level</li>
+            <li>Say when you want to play: a specific time or a flexible window</li>
+            <li>Get matched with an opponent at your level and a pitch</li>
+            <li>Pay your share in the app; refunds are automatic if the game is cancelled</li>
+          </ul>
+        </div>
+        <div>
+          <h3>For venues &mdash; web dashboard</h3>
+          <ul>
+            <li>Weekly calendar per pitch, with walk-in and phone bookings alongside app matches</li>
+            <li>The matchmaking pool, where staff can add walk-in teams too</li>
+            <li>Pitches, prices and 7-a-side combinations of two pitches</li>
+            <li>Revenue by source, CSV export, and payouts through Stripe</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery" data-reveal>
+    <figure>
+      <a class="case-img" href="../../demos/futsalaki/#matchmaking"><img src="../../assets/shots/futsalaki-matchmaking.jpg" alt="Matchmaking pool: teams waiting for an opponent, grouped by 5v5 and 7v7" width="2160" height="1350" loading="lazy"></a>
+      <figcaption class="case-cap">The matchmaking pool, split by format.</figcaption>
+    </figure>
+    <figure>
+      <a class="case-img" href="../../demos/futsalaki/#matchmaking"><img src="../../assets/shots/futsalaki-addpool.jpg" alt="Adding a walk-in team to the pool with date, time window, level and format" width="2160" height="1350" loading="lazy"></a>
+      <figcaption class="case-cap">A walk-in team can be added from the front desk.</figcaption>
+    </figure>
+  </div>
+
+  <section class="case-sec" data-reveal>
+    <h2><span class="label">How it works</span>From a request to a game</h2>
+    <div class="case-sec__body">
+      <ol class="steps">
+        <li><div><b>A team joins the pool</b><p>With a date, a time window, a format (5v5 on one pitch, 7v7 on two) and a level: casual, intermediate or competitive.</p></div></li>
+        <li><div><b>The system looks for an opponent</b><p>Same day, same format, same level &mdash; or any level if the team allows it &mdash; and at least an hour where both windows overlap.</p></div></li>
+        <li><div><b>A pitch is assigned</b><p>The first free pitch (or pitch pair for 7v7) inside the overlap, checked against existing bookings, blocks and opening hours.</p></div></li>
+        <li><div><b>Both teams are confirmed and charged</b><p>Payment goes through Stripe and the venue is paid out automatically. If one team cancels, it is refunded and the other goes back into the pool.</p></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="case-sec" data-reveal>
+    <h2><span class="label">My part</span>Money and reliability</h2>
+    <div class="case-sec__body">
+      <p class="big">A booking app is only as good as the moment someone&rsquo;s card is charged. That is where I spent most of my time.</p>
+      <p>I worked on the payment flow on Stripe Connect &mdash; player payments, venue onboarding and payouts, automatic refunds, and forfeits kept on late cancellations &mdash; and on making the whole thing safe to put in front of paying customers.</p>
+      <p>Before launch I led an engineering review of the codebase and split the fixes into focused workstreams: database quick wins, column-level privileges, rate limiting, error monitoring, payment safety, a CI pipeline and performance.</p>
+    </div>
+  </section>
+
+  <section class="case-sec" data-reveal>
+    <h2><span class="label">Under the hood</span>Stack and decisions</h2>
+    <div class="case-sec__body">
+      <dl class="tech">
+        <dt>Player app</dt><dd>React Native with Expo; Android builds shipped to testers through EAS.</dd>
+        <dt>Venue dashboard</dt><dd>Next.js and TypeScript.</dd>
+        <dt>Backend</dt><dd>Supabase: Postgres, authentication with Google sign-in, and Edge Functions that receive Stripe webhooks.</dd>
+        <dt>Payments</dt><dd>Stripe Connect &mdash; venues onboard as connected accounts and receive payouts; refunds and forfeits are handled server-side.</dd>
+        <dt>CI</dt><dd>GitHub Actions on every push to staging: type checks, linting, dependency audit, and a secret scan with <code>gitleaks</code>.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <div class="gallery" data-reveal>
+    <figure>
+      <a class="case-img" href="../../demos/futsalaki/#calendar"><img src="../../assets/shots/futsalaki-block.jpg" alt="Blocking a pitch: the system lists every booking that clashes and what will happen to it" width="2160" height="1350" loading="lazy"></a>
+      <figcaption class="case-cap">Blocking a pitch checks for clashes first: bookings are moved to another pitch where possible, app matches are refunded, and manual ones are flagged with a phone number.</figcaption>
+    </figure>
+    <figure>
+      <a class="case-img" href="../../demos/futsalaki/#revenue"><img src="../../assets/shots/futsalaki-revenue.jpg" alt="Revenue: totals split into manual, app and forfeitures, with a chart over the month" width="2160" height="1350" loading="lazy"></a>
+      <figcaption class="case-cap">Revenue, split by where the money came from.</figcaption>
+    </figure>
+    <figure>
+      <a class="case-img" href="../../demos/futsalaki/#bookings"><img src="../../assets/shots/futsalaki-bookings.jpg" alt="Bookings list with source and status filters" width="2160" height="1350" loading="lazy"></a>
+      <figcaption class="case-cap">Every booking in one list, from the app or the front desk.</figcaption>
+    </figure>
+    <figure>
+      <a class="case-img" href="../../demos/futsalaki/#pitches"><img src="../../assets/shots/futsalaki-pitches.jpg" alt="Pitches with hourly prices and 7v7 combinations" width="2160" height="1350" loading="lazy"></a>
+      <figcaption class="case-cap">Pitches, prices and the two-pitch combinations used for 7v7.</figcaption>
+    </figure>
+  </div>
+  <p class="case-cap">Screens from the interactive demo, which mirrors the real venue dashboard with sample data.</p>
+
+  <div class="case-cta" data-reveal>
+    <p>Try the venue dashboard<span>Add a team to the pool and watch it get matched, block a pitch, export revenue. Runs in your browser with sample data.</span></p>
+    <div class="case-cta__links">
+      <a class="btn" href="../../demos/futsalaki/">Open the demo</a>
+      <a class="btn btn--ghost" href="https://futsalaki.com" rel="noopener">futsalaki.com</a>
+    </div>
+  </div>
+
+  <a class="next" href="../sssb-market/">
+    <p class="label">Next case study</p>
+    <strong>SSSB Market</strong>
+  </a>
+
+</main>
+
+<footer class="foot wrap">
+  <span>&copy; <span id="y">2026</span> Ioannis Tambourlas</span>
+  <span>Stockholm &middot; Nicosia</span>
+</footer>
+
+<script src="../../assets/site.js"></script>
+</body>
+</html>

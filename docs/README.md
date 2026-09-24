@@ -5,11 +5,15 @@ Plain HTML and CSS, no build step. Served by GitHub Pages from this `docs/` fold
 ```
 docs/
 ├── index.html                    the portfolio
-├── styles.css
+├── styles.css                    shared by every page
+├── work/
+│   ├── futsalaki/                case study
+│   └── sssb-market/              case study
 ├── Ioannis-Tambourlas-CV.pdf     résumé linked from the site (generated from cv.html)
 ├── cv.html                       source for the PDF (A4, print-ready)
 ├── assets/
 │   ├── favicon.svg
+│   ├── site.js                   menu, header and reveal behaviour (all pages)
 │   ├── portrait.jpg              ← add your photo here (4:5, ~900×1125)
 │   └── shots/                    project screenshots, taken from the demos
 └── demos/

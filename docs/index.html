@@ -80,7 +80,7 @@
 
     <!-- Futsalaki -->
     <article class="work" id="futsalaki">
-      <a class="work__media" href="demos/futsalaki/" aria-label="Open the Futsalaki venue dashboard demo">
+      <a class="work__media" href="work/futsalaki/" aria-label="Read the Futsalaki case study">
         <img src="assets/shots/futsalaki-calendar.jpg" alt="Futsalaki venue dashboard — weekly calendar per pitch" width="2160" height="1350" loading="lazy">
       </a>
       <div class="work__strip">
@@ -91,7 +91,7 @@
       <div class="work__body">
         <div class="work__title">
           <span class="work__num">01</span>
-          <h3>Futsalaki</h3>
+          <h3><a href="work/futsalaki/">Futsalaki</a></h3>
           <p class="work__sub">Matchmaking and pitch booking for futsal in Cyprus</p>
         </div>
         <div class="work__text">
@@ -112,6 +112,7 @@
             <dt>Stack</dt><dd>TypeScript, Next.js, React Native (Expo), Supabase, Stripe Connect, GitHub Actions</dd>
           </dl>
           <p class="work__links">
+            <a class="arrow" href="work/futsalaki/">Read the case study</a>
             <a class="arrow" href="demos/futsalaki/">Open the live demo</a>
             <a class="ext" href="https://futsalaki.com" rel="noopener">futsalaki.com</a>
           </p>
@@ -121,7 +122,7 @@
 
     <!-- SSSB Market -->
     <article class="work" id="sssb-market">
-      <a class="work__media work__media--phones" href="demos/student-market/" aria-label="Open the SSSB Market demo">
+      <a class="work__media work__media--phones" href="work/sssb-market/" aria-label="Read the SSSB Market case study">
         <img src="assets/shots/market-board.jpg" alt="SSSB Market board with categories and listings" width="780" height="1560" loading="lazy">
         <img src="assets/shots/market-listing.jpg" alt="A listing with price, condition and WhatsApp contact" width="780" height="1560" loading="lazy">
         <img src="assets/shots/market-sell.jpg" alt="The sell form" width="780" height="1560" loading="lazy">
@@ -130,7 +131,7 @@
       <div class="work__body">
         <div class="work__title">
           <span class="work__num">02</span>
-          <h3>SSSB Market</h3>
+          <h3><a href="work/sssb-market/">SSSB Market</a></h3>
           <p class="work__sub">Second-hand furniture between students in Stockholm</p>
         </div>
         <div class="work__text">
@@ -150,6 +151,7 @@
             <dt>Stack</dt><dd>TypeScript, Next.js, React, Prisma, PostgreSQL (Supabase), Tailwind CSS</dd>
           </dl>
           <p class="work__links">
+            <a class="arrow" href="work/sssb-market/">Read the case study</a>
             <a class="arrow" href="demos/student-market/">Open the live demo</a>
           </p>
         </div>
@@ -332,25 +334,8 @@
   <span>Stockholm &middot; Nicosia</span>
 </footer>
 
+<script src="assets/site.js"></script>
 <script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-
-  // Mobile menu
-  var toggle = document.querySelector('.nav__toggle'), menu = document.getElementById('menu');
-  toggle.addEventListener('click', function () {
-    var open = toggle.getAttribute('aria-expanded') !== 'true';
-    toggle.setAttribute('aria-expanded', String(open));
-    menu.classList.toggle('is-open', open);
-  });
-  menu.addEventListener('click', function (e) {
-    if (e.target.tagName === 'A') { toggle.setAttribute('aria-expanded', 'false'); menu.classList.remove('is-open'); }
-  });
-
-  // Header gets a hairline once the page scrolls
-  var nav = document.querySelector('.nav');
-  function onScroll() { nav.classList.toggle('is-scrolled', window.scrollY > 8); }
-  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
-
   // Contact form → prefilled email
   document.getElementById('form').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -359,16 +344,6 @@
     var body = msg + '\n\n— ' + name + (from ? ' (' + from + ')' : '');
     location.href = 'mailto:ioannis.tambourlas@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
   });
-
-  // Gentle reveal on scroll
-  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var items = document.querySelectorAll('.work, .more, .about__grid, .rows li, .results li, .tools > div, .contact__grid');
-    items.forEach(function (el) { el.classList.add('reveal'); });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    items.forEach(function (el) { io.observe(el); });
-  }
 </script>
 </body>
 </html>
