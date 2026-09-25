@@ -321,3 +321,10 @@ h1, h2, h3 { margin: 0; }
   .tech dd { padding-top: 0; }
   .steps li { grid-template-columns: 40px minmax(0, 1fr); }
 }
+
+/* Futsalaki player-app screens (App Store artwork) */
+.appshots { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 1.4vw, 16px); margin-top: clamp(10px, 1.6vw, 20px); padding: clamp(12px, 2vw, 24px); background: #0c1b33; border-radius: 6px; }
+.appshots img { width: 100%; height: auto; border-radius: 4px; }
+.gallery--app { display: block; margin-top: clamp(40px, 5vw, 64px); }
+.gallery--app .appshots { margin-top: 0; }
+@media (max-width: 560px) { .appshots { grid-template-columns: 1fr 1fr; } }

@@ -41,7 +41,7 @@
     <dl class="case-meta">
       <div><dt>Role</dt><dd>Co-founder &amp; engineer</dd></div>
       <div><dt>Timeline</dt><dd>2026 &ndash; present</dd></div>
-      <div><dt>Team</dt><dd>With Panayiotis Charalambous</dd></div>
+      <div><dt>Status</dt><dd>Live on the <a href="https://apps.apple.com/us/app/futsalaki/id6781737625" rel="noopener">App Store</a> &amp; <a href="https://play.google.com/store/apps/details?id=com.futsalaki.app" rel="noopener">Google Play</a></dd></div>
       <div><dt>Links</dt><dd><a href="../../demos/futsalaki/">Live demo</a> &middot; <a href="https://futsalaki.com" rel="noopener">futsalaki.com</a></dd></div>
     </dl>
   </section>
@@ -67,10 +67,11 @@
         <div>
           <h3>For teams &mdash; iOS &amp; Android</h3>
           <ul>
-            <li>Sign in with Google and create a team with a skill level</li>
-            <li>Say when you want to play: a specific time or a flexible window</li>
-            <li>Get matched with an opponent at your level and a pitch</li>
-            <li>Pay your share in the app; refunds are automatic if the game is cancelled</li>
+            <li>Book a full pitch, or open a match and let the app find opponents &mdash; 5v5 up to 11v11</li>
+            <li>Pick a flexible time window instead of one fixed slot</li>
+            <li>Short a player? &ldquo;Player patch&rdquo; fills the squad</li>
+            <li>Both captains report the score; matching reports confirm automatically</li>
+            <li>A league leaderboard and win rate for every team</li>
           </ul>
         </div>
         <div>
@@ -97,6 +98,16 @@
     </figure>
   </div>
 
+  <div class="gallery gallery--app" data-reveal>
+    <div class="appshots">
+        <img src="../../assets/shots/futsalaki-app-1.webp" alt="Futsalaki app: join an open match, pay and play" width="600" height="1298" loading="lazy">
+        <img src="../../assets/shots/futsalaki-app-2.webp" alt="Futsalaki app: league leaderboard" width="600" height="1298" loading="lazy">
+        <img src="../../assets/shots/futsalaki-app-3.webp" alt="Futsalaki app: book a full pitch or find a match, 5v5 to 11v11" width="600" height="1298" loading="lazy">
+        <img src="../../assets/shots/futsalaki-app-4.webp" alt="Futsalaki app: flexible time windows, player patch, verified scoring, win rate" width="600" height="1298" loading="lazy">
+      </div>
+  </div>
+  <p class="case-cap">The player app, as it appears on the App Store.</p>
+
   <section class="case-sec" data-reveal>
     <h2><span class="label">How it works</span>From a request to a game</h2>
     <div class="case-sec__body">
@@ -122,9 +133,10 @@
     <h2><span class="label">Under the hood</span>Stack and decisions</h2>
     <div class="case-sec__body">
       <dl class="tech">
-        <dt>Player app</dt><dd>React Native with Expo; Android builds shipped to testers through EAS.</dd>
-        <dt>Venue dashboard</dt><dd>Next.js and TypeScript.</dd>
-        <dt>Backend</dt><dd>Supabase: Postgres, authentication with Google sign-in, and Edge Functions that receive Stripe webhooks.</dd>
+        <dt>One codebase</dt><dd>A Turborepo monorepo holds the player app, the venue dashboard and the shared types, so a schema change ships to both clients in the same commit.</dd>
+        <dt>Player app</dt><dd>React Native with Expo; builds through EAS, with over-the-air updates for JavaScript-only fixes.</dd>
+        <dt>Venue dashboard</dt><dd>Next.js and TypeScript, deployed on Vercel.</dd>
+        <dt>Backend</dt><dd>Supabase Postgres with Row Level Security on every table, Realtime for the matchmaking pool, and Edge Functions that receive Stripe webhooks.</dd>
         <dt>Payments</dt><dd>Stripe Connect &mdash; venues onboard as connected accounts and receive payouts; refunds and forfeits are handled server-side.</dd>
         <dt>CI</dt><dd>GitHub Actions on every push to staging: type checks, linting, dependency audit, and a secret scan with <code>gitleaks</code>.</dd>
       </dl>
