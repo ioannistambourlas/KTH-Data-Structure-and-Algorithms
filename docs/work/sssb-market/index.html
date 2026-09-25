@@ -3,38 +3,55 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SSSB Market — Ioannis Tambourlas</title>
-  <meta name="description" content="Case study: SSSB Market, a second-hand furniture board for students in SSSB housing in Stockholm — no accounts, WhatsApp contact, Next.js and Postgres.">
-  <meta property="og:title" content="SSSB Market — case study">
+  <title>SSSB Market | Ioannis Tambourlas</title>
+  <meta name="description" content="Case study: SSSB Market, a second-hand furniture board for students in SSSB housing in Stockholm: no accounts, WhatsApp contact, Next.js and Postgres.">
+  <meta property="og:title" content="SSSB Market | case study">
   <meta property="og:image" content="../../assets/shots/market-board.jpg">
-  <meta name="theme-color" content="#f7f6f2">
+  <meta name="theme-color" content="#fbfaf7">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../styles.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-<header class="nav">
-  <div class="wrap nav__inner">
-    <a class="nav__name" href="../../"><img src="../../assets/portrait.jpg" alt="" width="30" height="30">Ioannis Tambourlas</a>
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
-    <nav class="nav__links" id="menu" aria-label="Main">
-      <a href="../../#work">Work</a>
+<div class="loadbar" id="loadbar" aria-hidden="true"></div>
+
+<div class="topbar">
+  <div class="wrap topbar__inner">
+    <span>Stockholm, Sweden</span>
+    <span class="topbar__right">
+      <a href="mailto:ioannis.tambourlas@gmail.com">ioannis.tambourlas@gmail.com</a>
+      <a href="https://github.com/ioannistambourlas" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ioannis-tambourlas-84197b3ab/" rel="noopener">LinkedIn</a>
+    </span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="../../">
+      <span class="brand__name">Ioannis Tambourlas</span>
+      <span class="brand__tag">Software developer &amp; badminton player</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu"><span></span>Menu</button>
+    <nav class="menu" id="menu" aria-label="Main">
+      <a href="../../#projects">Projects</a>
       <a href="../../#experience">Experience</a>
       <a href="../../#badminton">Badminton</a>
       <a href="../../#about">About</a>
       <a href="../../#contact">Contact</a>
-      <a class="nav__cv" href="../../Ioannis-Tambourlas-CV.pdf" download>Résumé</a>
+      <a class="menu__cv" href="../../Ioannis-Tambourlas-CV.pdf" download>Download CV</a>
     </nav>
   </div>
 </header>
 
-<main class="wrap">
+<main id="main" class="wrap case">
 
   <section class="case-hero">
-    <a class="case-back" href="../../#work">&larr; All work</a>
+    <a class="case-back" href="../../#projects">&larr; All projects</a>
     <p class="label">Case study 02</p>
     <h1>SSSB Market</h1>
     <p class="case-hero__sub">A second-hand furniture board for students in Stockholm. Post in a minute, no account, and the buyer messages you on WhatsApp.</p>
@@ -57,7 +74,7 @@
     <h2><span class="label">The problem</span>Furniture in the bin room</h2>
     <div class="case-sec__body">
       <p class="big">Every August thousands of students move into SSSB housing in Stockholm. Every June many of them move out, and a lot of perfectly good furniture ends up in the bin room.</p>
-      <p>The people who need a desk and the people throwing one out often live in the same building. Existing marketplaces want an account, a profile and a message thread before anything happens &mdash; too much friction for a 200-kronor lamp that has to be gone by Friday.</p>
+      <p>The people who need a desk and the people throwing one out often live in the same building. Existing marketplaces want an account, a profile and a message thread before anything happens. That is too much friction for a 200-kronor lamp that has to be gone by Friday.</p>
     </div>
   </section>
 
@@ -93,7 +110,7 @@
       <dl class="tech">
         <dt>Framework</dt><dd>Next.js 16 with the App Router and React 19, in TypeScript, styled with Tailwind CSS 4.</dd>
         <dt>Data</dt><dd>Prisma 7 on Supabase Postgres. Board queries hit one composite index on status, area, category and date.</dd>
-        <dt>No accounts</dt><dd>Each listing gets a secret manage token &mdash; 24 random bytes, base64url &mdash; which becomes the seller&rsquo;s private link.</dd>
+        <dt>No accounts</dt><dd>Each listing gets a secret manage token (24 random bytes, base64url) which becomes the seller&rsquo;s private link.</dd>
         <dt>Photos</dt><dd>Resized to 1280&nbsp;px JPEG in the browser before upload, stored in Supabase Storage and served through a small redirect route to the CDN.</dd>
         <dt>Validation</dt><dd><code>zod</code> schemas for every listing; phone numbers checked per country with <code>libphonenumber-js</code> and stored in E.164.</dd>
         <dt>Spam</dt><dd>At most five posts per IP per hour, tracked in its own table, plus a honeypot field that quietly gives bots a fake success.</dd>
@@ -124,9 +141,34 @@
 
 </main>
 
-<footer class="foot wrap">
-  <span>&copy; <span id="y">2026</span> Ioannis Tambourlas</span>
-  <span>Stockholm &middot; Nicosia</span>
+<footer class="site-footer">
+  <div class="wrap site-footer__cols">
+    <div>
+      <h3 class="widget__title">Ioannis Tambourlas</h3>
+      <p>Computer Science student at KTH, co-founder of Futsalaki and badminton player for Cyprus.</p>
+    </div>
+    <div>
+      <h3 class="widget__title">Projects</h3>
+      <ul>
+        <li><a href="../futsalaki/">Futsalaki</a></li>
+        <li><a href="../sssb-market/">SSSB Market</a></li>
+        <li><a href="../../demos/futsalaki-app/">Futsalaki app demo</a></li>
+        <li><a href="../../demos/student-market/">SSSB Market demo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="widget__title">Elsewhere</h3>
+      <ul>
+        <li><a href="https://github.com/ioannistambourlas" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/ioannis-tambourlas-84197b3ab/" rel="noopener">LinkedIn</a></li>
+        <li><a href="../../Ioannis-Tambourlas-CV.pdf" download>CV (PDF)</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap site-footer__bottom">
+    <span>&copy; <span id="y">2026</span> Ioannis Tambourlas</span>
+    <a href="#main" class="totop">Back to top</a>
+  </div>
 </footer>
 
 <script src="../../assets/site.js"></script>
