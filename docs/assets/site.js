@@ -20,7 +20,7 @@
   if (y) y.textContent = new Date().getFullYear();
 
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var items = document.querySelectorAll('[data-reveal], .work, .more, .about__grid, .rows li, .results li, .tools > div, .contact__grid');
+    var items = document.querySelectorAll('[data-reveal], .proj, .about, .tl li, .board li, .tools > div, .contact, .head');
     items.forEach(function (el) { el.classList.add('reveal'); });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); } });
